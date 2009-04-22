@@ -99,7 +99,7 @@ int palindromeTest(unsigned long int a) {
 /**
  * Some compilers don't have this function
  * so I provide a version here.
- *
+ */
 char *strrev(char *str) {
 	char *p1, *p2, t;
 	if (! str || ! *str)
