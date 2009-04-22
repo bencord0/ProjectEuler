@@ -1,7 +1,6 @@
 /*
 Find the greatest product of five consecutive digits in the 1000-digit number.
 */
-
 char thousand_digit_number[] =
 "73167176531330624919225119674426574742355349194934\
 96983520312774506326239578318016984801869478851843\
@@ -27,10 +26,32 @@ char thousand_digit_number[] =
 #include <stdio.h>
 #include <stdlib.h>
 
+#define DATA008 "008.data"
+
 int Problem008(void) {
-	return 1;
+	int digits[5];
+	int i,j;
+	int max_product = 0;
+	char ish[2];
+	
+	ish[1] = '\0';
+	
+	for(i=0;i<1000-5;i++) {
+		for(j=i;j<i+5;j++) { /*XXX*/
+			ish[0] = thousand_digit_number[j];
+			digits[j-i] = atoi(ish);
+		}
+		
+		if(five_product(digits) > max_product) {
+			max_product = five_product(digits);
+		}
+	}
+	
+	printf("%d", max_product);
+
+	return 0;
 }
 
-int calculate_product(int digits[5]) {
+int five_product(int digits[5]) {
 	return digits[0] * digits[1] * digits[2] * digits[3] * digits[4];
 }
