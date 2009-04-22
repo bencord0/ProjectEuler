@@ -1,0 +1,192 @@
+Some problems require the use of very large numbers. Instead of programming my own library, the GNU Multiple Precision Library (GMP) will be used instead.
+
+Integers:
+	mpz_t sum;
+	struct foo { mpz_t x, y; };
+	mpz_t vec[20];
+Rationals:
+	mpq_t quotient;
+Floating point:
+	mpf_t fp;
+note - floating point functions accept and return exponents of type
+mp_exp_t.
+
+Function Classes
+	1/. signed integer arithmetic functions are prefixed with mpz_, returning mpz_t. (150 functions)
+	2/. rational number arithmetic, prefixed with mpq_. (40 functions)
+	3/. floating point arithmetic, mpq_. (60 functions).
+	4/. other functions exist, but they would be hard to use. see gmp documentation.
+
+Before using any GMP variables, they need to be initialized. Then, once used they need to be cleared. Initialise them using the correct type prefix'd function.
+eg.
+void foo (void) {
+	mpz_t n;
+	int i;
+	mpz_init(n);
+	for(i=1;i<100;i++) {
+		mpz_mul(n, ...);
+		mpz_fdiv_q(n, ...);
+		...
+	}
+	mpz_clear(n);
+}
+
+Functions with GMP
+If a function is to return a GMP result, then it should designate a parameter and set it within the function.
+void foo(mpz_t result, const mpz_t param, unsigned long n) {
+	unsigned long i;
+	mpz_mul_ui(result, param, n);
+	for(i=1;i<n;i++)
+		mpz_add_ui(result, result, i*7);
+}
+
+int main(void) {
+	mpz_t r, n;
+	mpz_init (r);
+	mpz_init_set_str(n, "123456", 0);
+	foo(r,n,20L);
+	gmp_printf("%Zd\n", r);
+	return 0;
+}
+
+List of functions (integers)
+	-memory management
+void mpz_init(mpz_t integer) /* initialise integer and set to 0 */
+void mpz_clear(mpz_t integer) /* call this when done with a variable */
+	-assignment
+void mpz_set(mpz_t rop, mpz_t op)
+void mpz_set_ui(mpz_t rop, unsigned long int op)
+void mpz_set_si(mpz_t rop, signed long int op)
+void mpz_set_d(mpz_t rop, double op)
+void mpz_set_q(mpz_t rop, mpq_t op)
+void mpz_set_f(mpz_t rop, mpf_t op) /* set the value of rop from op */
+int mpz_set_str(mpz_t rop, char *str, int base)
+	/* set the value of rop from str (null terminated C string ignoring whitespace) in base base (from 2 to 62, or if 0, then leading character is used 0x hexadecimal, 0b binary, 0 octal, decimal otherwise. For bases up to 36, case is ignored. for bases 37 to 62, uppercase letter represent 10..35, lowercase represent 36..61. Returns 0 if the string is a valid number in the base, otherwise returns -1. */
+void mpz_swap(mpz_t rop1, mpz_t rop2) /* efficient swap */
+
+Initialisation and assignment in one go.
+mpz_init_set_str(rop, ...) and the rest all have a similar form.
+
+Conversions
+unsigned long int mpz_get_ui(mpz_t op) /* If op is too big, then just the least significant bits that can are returned, sign ignored. */
+signed long int mpz_get_si(mpz_t op) /* as above, same sign */
+double mpz_get_d(mpz_t op) /* rounds towards zero. infinity returned if available, other traps may (or not) occur */
+double mpz_get_2exp(signed long int *exp, mpz_t op) /* returns exponent separately. return value is in the range 0.5< = |d| < 1, exponent stored to *exp. d*2^exp is truncated op. */
+char *mpz_get_str(char *str, int base, mpz_t op) /* base is 2..36 for lowercase letters; -2..-36 for uppercase letters; 37-62 for uppercase/lowercase mix.  If str is NULL, returned block will be strlen(str)+1 bytes. If not NULL, it should point to a block of storage large enough, ie mpz_sizeinbase(op, base) +2
+
+Arithmetic (integers)
+void mpz_add(mpz_t rop, mpz_t op1, mpz_t op2)
+void mpz_add_ui(mpz_t rop, mpz_t op1, unsigned long int op2)
+
+void mpz_sub(mpz_t rop, mpz_t op1, mpz_t op2)
+void mpz_sub_ui(mpz_t rop, mpz_t op1, unsigned long int op2)
+void mpz_ui_sub(mpz_t rop, unsigned long int op1, mpz_t op2)
+
+void mpz_mul(mpz_t rop, mpz_t op1, mpz_t op2)
+void mpz_mul_si(mpz_t rop, mpz_t op1, long int op2)
+void mpz_mul_ui(mpz_t rop, mpz_t op1, unsigned long int op2)
+
+void mpz_addmul(mpz_t rop, mpz_t op1, mpz_t op2)
+void mpz_addmul_ui(mpz_t rop, mpz_t op1, unsigned long int op2)
+	/* rop = rop + op1 * op2 */
+void mpz_submul.... /* rop = rop - op1 * op2 */
+
+void mpz_neg(mpz_t rop, mpz_t op) /* negates */
+void mpz_abs(mpz_t rop, mpz_t op) /* absolute value */
+
+void mpz_mod(mpz_t r, mpz_t n, mpz_t d)
+unsigned long int mpz_mod_ui(mpz_t r, mpz_t n, unsigned long int d)
+ /* r = n (mod d) */
+ 
+ void mpz_divexact(mpz_t q, mpz_t n, mpz_t d)
+ void mpz_divexact_ui(mpz_t q, mpz_t n, unsigned long d)
+ /* q = n/d */
+ 
+int mpz_divisible_p(mpz_t n, mpz_t d)
+int mpz_divisible_ui_p(mpz_t n, unsigned long int d)
+ /* if there is an integer q such that n = qd, then returns non-zero, d=0 allowed */
+int mpz_congruent_p(mpz_t n, mpz_t c, mpz_t d)
+int mpz_congruent_ui_p(mpz_t n, unsigned long int c, unsigned long int d)
+ /* non-zero if an integer q such that n = c + qd, d=0 allowed.
+ 
+void mpz_powm(mpz_t rop, mpz_t base, mpz_t ezp, mpz_t mod)
+void mpz_powm_ui(mpz_t rop, mpz_t base, unsigned long int exp, mpz_t mod)
+/* rop = base^exp (mod mod) */
+void mpz_pow_ui(mpz_t rop, mpz_t base, unsigned long int exp)
+void mpz_ui_pow_ui(mpz_t rop, unsigned long int base, unsigned long int exp)
+/* rop = base^exp. 0^0 = 1 */
+
+int mpz_root(mpz_t rop, mpz_t op, unsigned long int n)
+/* rop = integer part of the nth root of op, non-zero if exact */
+void mpz_rootrem(mpz_t root, mpz_t rem, mpz_t u, unsigned long int n)
+/* root = |n root u|, rem = u - root^n */
+void mpz_sqrt(mpz_t rop, mpz_t op) /* integer part of sqrt(op) */
+void mpz_sqrtrem(mpz_t rop1, mpz_t rop2, mpz_t op) /* rop2 = op-rop1^2) 0 if op is a perfect square, dangerous if rop1 is rop2 */
+int mpz_perfect_power_p(mpz_t op)
+/* non-zero if integers a,b such that op=a^b; b>1 */
+int mpz_perfect_square_p(mpz_t op) /* non-zero if perfect square */
+
+int mpz_probab_prime_p(mpz_t n, int reps)
+/* check if n is prime. return 2 if definatly prime, 1 if probably prime (not certain), 0 if definitely composite.
+First, some trivial devisions are done, then some Miller-Rabin probabilistic primality tests. reps controls how many tests are done, 5-10 is reasonable, more redices the chances of composite being returned as probably prime */
+
+void mpz_nextprime(mpz_t rop, mpz_t op)
+/* rop is next prime greater than op, probabilistic algorithm identifies primes. it works practically */
+
+void mpz_gcd(mpz_t rop, mpz_t op1, mpz_t op2) /* positive gcd of op1/2 */
+
+void mpz_gcdext(mpz_t g, mpz_t s, mpz_t t, mpz_t a, mpz_t b)
+/* as + bt = g, where g = gcd(a,b) and s,t are to be set */
+
+void mpz_lcm(mpz_t rop, mpz_t op1, mpz_t op2)
+void mpz_lcm_ui(mpz_t rop, mpz_t op1, unsigned long op2)
+/* rop = lcm(op1,op2) */
+
+unsigned long int mpz_remove(mpz_t rop, mpz_t op, mpz_t f)
+/* remove all occurrences of factor f from op, store in rop, counts of f is returned */
+
+void mpz_fac_ui(mpz_t rop, unsigned long int op) /* rop = op! */
+
+void mpz_bin_ui(mpz_t rop, mpz_t n, unsigned long int k)
+void mpz_bin_uiui(mpz_t rop, unsigned long int n, unsigned long int k)
+/* compute binomial coefficient (n k). */
+
+void mpz_fib_ui(mpz_t fn, unsigned long int n)
+void mpz_fib2_ui(mpz_t fn, mpz_t fnsub1, unsigned long int n)
+/* fn is the nth Fibonacci number. mpz_fib2_ui sets fnand fnsub1 to the (n-1)th Fibonacci number. F_n+1 = F_n + F_n-1 */
+
+Comparisons
+int mpz_cmp(mpz_t op1, mpz_t op2)
+int mpz_cmp_d(mpz_t op1, double op2)
+int mpz_cmp_si(mpz_t op1, signed long int op2)
+int mpz_cmp_ui(mpz_t op1, unsigned long int op2)
+/* return positive if op1>op2, zero if op1=op2, negative if op1<op2 */
+
+int mpz_cmpabs(...) /* same as above, but |op1| and |op2| are compared */
+
+int mpz_sgn(mpz_t op) /* +1 if op>0, 0 if op=0 and -1 if op<0 */
+
+void mpz_and(mpz_t rop, mpz_t op1, mpz_t op2) /* bitwise and */
+void mpz_ior(mpz_t rop, mpz_t op1, mpz_t op2) /* bitwise inclusive or */
+void mpz_xor(mpz_t rop, mpz_t op1, mpz_t op2) /* bitwise exclusive or */
+void mpz_com(mpz_t rop, mpz_t op) /* complement of op (not) */
+
+Input/Output (include stdio.h before gmp.h)
+size_t mpz_out_str(FILE *stream, int base, mpz_t op)
+/* output op on stream, as a set of digits in base base. base cam be 2..62, or -2..-36. Return number of bytes written, or 0 if error */
+size_t mpz_inp_str(mpz_t rop, FILE *stream, int base)
+/* same rules apply for the string, saved to rop */
+
+size_t mpz_out_raw(FILE *stream, mpz_t op)
+/* output to stream in raw binary. Written in a portable format, 4 bytes of size information, and that many bytes of limbs. output as bigendian */
+size_t mpz_inp_raw(mpz_t rop, FILE *stream)
+/* reads stream written in the format by mpz_out_raw into rop */
+
+Miscellaneous
+int mpz_fits_ulong_p(mpz_t op)
+/* or slong, uint, sint, ushort, sshort. returns non-zero if op fits in the type specified */
+
+int mpz_odd_p(mpz_t op)
+int mpz_even_p(mpz_t op) /* determine if op is odd or even, non-zero yes, zero no */
+
+size_t mpz_sizeinbase(mpz_t op, int base) /* returns the number of digits of op given in base (from 2 to 62). Useful for determining space required for a string, add 2 just in case (minus sign, and null-terminator) */

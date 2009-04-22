@@ -1,0 +1,29 @@
+Here are my own implementations of the problems listed on projecteuler.net
+The sub-problems are written to output the answer to each problem on standard out, or
+return non-zero if error or incomplete.
+The brief of each problem is included in the source code and can usually be retrieved
+with the 'head' command.
+
+Compile using
+	qmake -project CONFIG=console TARGET=Euler# to regen the .pro file
+	qmake # optional if you want to regen the makefile, you may need to choose -spec
+	make
+
+Programs written in C are designed to be ANSI C compliant, running make should work on all
+architectures (this may change if I feel like it).
+Java programs which are already compiled to object code should work on any machine
+with a sane javaVM. Recompilation is usually not necessary.
+
+Notes:
+	- To implement more problems, write the corresponding .c and .h file and
+	ammend main.c and euler.h, then re-run make.
+
+	- If compiling manually, some programs may need to be linked against functions.h/.c/.o
+	- Other libraries include the GNU Multiple Precision Arithmetic Library to deal with the
+	limitations that normal C has when dealing with BigNums.
+
+	- The only dependancy for the C programs is the ANSI standard and libgmp.
+	- Build dependancies are qmake from the Qt project.
+
+Author: Ben Cordero
+gpg: B8006909
