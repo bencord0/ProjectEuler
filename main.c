@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <time.h>
 #include "euler.h"
 
 int no_problem(void) {return 1;}
 
 int main(int argc, char **argv) {
+	time_t timeA, timeB;
 	int p_count=0;
 	int check, i;
 	int (*prog[MAX_PROGRAM_COUNT +1])(void);
@@ -30,13 +32,19 @@ int main(int argc, char **argv) {
 	prog[12] = Problem012;
 	prog[13] = Problem013;
 	prog[14] = Problem014;
+	prog[16] = Problem016;
+	prog[17] = Problem017;
 	prog[21] = Problem021;
 	prog[23] = no_problem;
 	prog[25] = Problem025;
 	prog[34] = no_problem;
 	prog[45] = Problem045;
 	prog[53] = Problem053;
+	prog[57] = Problem057;
+	prog[59] = Problem059;
 	
+	timeA = time(NULL);
+
 	if(argc>1) {
 		/**
 		 * for each number specified on command line, run that problem
@@ -59,12 +67,20 @@ int main(int argc, char **argv) {
 			printf("Problem%3d: ", p_count);
 
 			if((*prog[p_count])()) {
+				/* Failed */
 				printf("\b\b\b\b\b\b\b\b\b\b\b\b");
 			} else {
+				/* Success */
 				printf("\n");
 			}
 		}
 	
 	}
+
+	timeB = time(NULL);
+	
+	printf("\nTotal program time is %.3fs\n", difftime(timeB,timeA));
+	getchar();
+
 	return 0;
 }

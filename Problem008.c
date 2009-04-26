@@ -37,7 +37,7 @@ int Problem008(void) {
 	ish[1] = '\0';
 	
 	for(i=0;i<1000-5;i++) {
-		for(j=i;j<i+5;j++) { /*XXX*/
+		for(j=i;j<i+5;j++) {
 			ish[0] = thousand_digit_number[j];
 			digits[j-i] = atoi(ish);
 		}

@@ -27,6 +27,8 @@ HEADERS += euler.h \
            Problem012.h \
            Problem013.h \
            Problem014.h \
+	   Problem016.h \
+	   Problem017.h \
            Problem021.h \
            Problem023.h \
            Problem025.h \
@@ -53,6 +55,8 @@ SOURCES += functions.c \
            Problem012.c \
            Problem013.c \
            Problem014.c \
+	   Problem016.c \
+	   Problem017.c \
            Problem021.c \
            Problem023.c \
            Problem025.c \
