@@ -5,7 +5,6 @@
 int no_problem(void) {return 1;}
 
 int main(int argc, char **argv) {
-	time_t timeA, timeB;
 	int p_count=0;
 	int check, i;
 	int (*prog[MAX_PROGRAM_COUNT +1])(void);
@@ -42,8 +41,6 @@ int main(int argc, char **argv) {
 	prog[53] = Problem053;
 	prog[57] = Problem057;
 	prog[59] = Problem059;
-	
-	timeA = time(NULL);
 
 	if(argc>1) {
 		/**
@@ -76,11 +73,8 @@ int main(int argc, char **argv) {
 		}
 	
 	}
-
-	timeB = time(NULL);
 	
-	printf("\nTotal program time is %.3fs\n", difftime(timeB,timeA));
-	getchar();
+	printf("\nTotal program time is %.3fs\n", (double) clock()/CLOCKS_PER_SEC );
 
 	return 0;
 }
