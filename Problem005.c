@@ -6,34 +6,35 @@
  * all of the numbers from 1 to 20?
  */
 #include <stdio.h>
-#include <gmp.h>
-#include <limits.h>
-#define LIMIT 20
+#include <math.h>
 
 int Problem005(void) {
-	mpz_t suspect, test;
-	mpz_init(suspect); mpz_init(test);
-	
-	for(mpz_set_str(suspect,"230000000", 10); mpz_cmp_ui(suspect,INT_MAX)<0; mpz_add_ui(suspect,suspect,1)) {
+	int k=20;
+	int N=1;
+	int i=0;
+	int check=1;
+	int limit=sqrt(k);
+	int p[] = {2,3,5,7,11,13,17,19};
+	int a[] = {1,1,1,1, 1, 1, 1, 1};
+	int pwr, j;
 
-		for(mpz_set_ui(test,2); mpz_cmp(suspect, test) >0 && mpz_cmp_ui(test,LIMIT+1)<0 ; mpz_add_ui(test,test,1)) {
+	while(p[i]<=k) {
+		if(check) {
 
-			/* elimnate useless suspects, */
-			
-			if(mpz_divisible_p(suspect,test)) {
-				if(!mpz_cmp_ui(test,LIMIT)) {
-					gmp_printf("%Zd", suspect);
-					mpz_clear(suspect);mpz_clear(test);
-					return 0;
-				}
-				continue;
+			if(p[i] <= limit) {
+				a[i] = floor( log(k) / log(p[i]) );
 			} else {
-				break;
+				check = 0;
 			}
 		}
+
+		for(j=0,pwr=1;j<a[i];j++) {
+			pwr *= p[i];
+		}
+		N = N * pwr;
+		i++;
 	}
 
-	mpz_clear(suspect);mpz_clear(test);
-	return 1;
+	printf("%d",N);
+	return 0;
 }
-
