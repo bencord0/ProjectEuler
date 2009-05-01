@@ -5,15 +5,16 @@
 int no_problem(void) {return 1;}
 
 int main(int argc, char **argv) {
-	int p_count=0;
+	int p_count = 0;
 	int check, i;
+	int working = 0;
 	int (*prog[MAX_PROGRAM_COUNT +1])(void);
-	
+
 	/**
 	 * Unfortunatly, in C there is no way around this map.
 	 * Don't forget to redefine MAX_PROGRAM_COUNT in euler.h
 	 */
-	
+
 	while(p_count<=MAX_PROGRAM_COUNT)
 		prog[p_count++]=no_problem;
 
@@ -39,6 +40,7 @@ int main(int argc, char **argv) {
 	prog[25] = Problem025;
 	prog[34] = no_problem;
 	prog[45] = Problem045;
+	prog[48] = Problem048;
 	prog[53] = Problem053;
 	prog[57] = Problem057;
 	prog[59] = Problem059;
@@ -60,21 +62,33 @@ int main(int argc, char **argv) {
 	} else {
 		/**
 		* Select each sub program in turn or die.
-		*/	
+		*/
 		for(p_count=1;p_count <= MAX_PROGRAM_COUNT;p_count++) {
 			printf("Problem%3d: ", p_count);
 
-			if((*prog[p_count])()) {
-				/* Failed */
-				printf("\b\b\b\b\b\b\b\b\b\b\b\b");
-			} else {
+			check = (*prog[p_count])();
+			switch (check) {
+				case 0:
 				/* Success */
 				printf("\n");
+				working++;
+				break;
+
+				case 1:
+				default:
+				/* Fail */
+				printf("\b\b\b\b\b\b\b\b\b\b\b\b");
+				break;
+
+				case 2:
+				/* Memory/File error */
+				printf("Allocation error\n");
+				break;
 			}
 		}
-	
+	printf("\n%d Problems solved", working);
 	}
-	
+
 	printf("\nTotal program time is %.3fs\n", (double) clock()/CLOCKS_PER_SEC );
 
 	return 0;

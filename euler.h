@@ -24,6 +24,7 @@
 #include "Problem025.h"
 #include "Problem034.h"
 #include "Problem045.h"
+#include "Problem048.h"
 #include "Problem053.h"
 #include "Problem057.h"
 #include "Problem059.h"
