@@ -27,10 +27,10 @@ int Problem014(void) {
  * For a speed-up, I'll try to implement this using lookup tables,
  * a simple implementation is an array.
  */
-	
+
 	unsigned long long int index, length;
 	unsigned long long int longest_chain_index, longest_chain_length;
-	
+
 	/**
 	 * Setup the hash
 	 */
@@ -39,7 +39,7 @@ int Problem014(void) {
 		*(lookup+index) = 0;
 	}
 	*(lookup+1)=1;
-	
+
 	/**
 	 * Fill the hash
 	 * aka: for(index=1; index<MAX; index++)
@@ -54,13 +54,13 @@ int Problem014(void) {
 		}
 	}
 
-	printf("%d",longest_chain_index);
+	printf("%llu",longest_chain_index);
 
 	/**
 	 * Bomb the hashes
 	 */
 	free(lookup);
-	
+
 	return 0;
 }
 
@@ -71,25 +71,25 @@ int Problem014(void) {
 unsigned long long int Collatz_length(unsigned long long int const index) {
 	unsigned long long int op, length;
 	op = index;
-	
+
 	if(index < LOOKUP_SIZE && lookup[index]) {
 		return lookup[index];
 	}
-	
+
 	if (op == 1) {
 		return 1;
 	}
-	
+
 	if(op%2 == 1) /* odd */ {
 		op = (3*op) + 1;
 	} else /* even */ {
 		op /= 2;
 	}
 	length = Collatz_length(op) +1;
-	
+
 	if(index<LOOKUP_SIZE) {
 		lookup[index] = length;
 	}
-	
+
 	return length;
 }

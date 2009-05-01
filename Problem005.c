@@ -10,31 +10,28 @@
 
 int Problem005(void) {
 	int k=20;
-	int N=1;
+	double N=1.0;
 	int i=0;
 	int check=1;
-	int limit=sqrt(k);
-	int p[] = {2,3,5,7,11,13,17,19};
-	int a[] = {1,1,1,1, 1, 1, 1, 1};
-	int pwr, j;
+	int limit= (int) sqrt(k);
+	/* A list of primes */
+	int p[] = {2,3,5,7,11,13,17,19,20};
+	/* initial powers of corresponding primes */
+	int a[] = {1,1,1,1, 1, 1, 1, 1, 0};
 
-	while(p[i]<=k) {
+	for(i=0;p[i]<=k;i++) {
 		if(check) {
 
 			if(p[i] <= limit) {
-				a[i] = floor( log(k) / log(p[i]) );
+				a[i] = (int) floor( log10(k) / log10(p[i]) );
 			} else {
-				check = 0;
+				check=0;
 			}
 		}
-
-		for(j=0,pwr=1;j<a[i];j++) {
-			pwr *= p[i];
-		}
-		N = N * pwr;
-		i++;
+		N *= pow(p[i],a[i]);
 	}
 
-	printf("%d",N);
+	i = (int) N;
+	printf("%d",i);
 	return 0;
 }

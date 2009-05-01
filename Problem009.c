@@ -13,6 +13,7 @@
  *	Part3: Return the product a*b*c
  */
 #include <stdio.h>
+#include "Problem009.h"
 
 int Problem009(void) {
 	int a,b,c;

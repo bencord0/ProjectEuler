@@ -70,29 +70,28 @@ int sumToN(int n)	{
 int palindromeTest(unsigned long int a) {
 	char *forward;
 	char *backward;
-	int i;
 	size_t size;
 	mpz_t A;
-	
+
 	mpz_init_set_ui(A, a);
 	size = mpz_sizeinbase(A, 10) + 1; /* for the sign and '\0' */
 	forward = malloc(sizeof(char) * size);
 	backward = malloc(sizeof(char) * size);
-		
+
 	if(size <= gmp_snprintf(forward, size, "%Zd", A)) {
 		/*bad stuff happened*/
 	}
 	mpz_clear(A); /* Don't need it anymore */
-	
+
 	/* Now reverse the string, then compare */
-	
+
 	strcpy(backward, forward);
 	backward = strrev(backward);
-	
+
 	if(strcmp(forward, backward)) {
 		return 0;
 	}
-	
+
 	return 1;
 }
 
@@ -115,13 +114,13 @@ char *strrev(char *str) {
 int is_prime(unsigned long int num) {
 	unsigned long int i;
 	if(!num || num==1) return 0;
-		
+
 	for(i=2; i<sqrt(num); i++) {
 		if(num % i)
 			return 1;
 		else break;
 	}
-	
+
 	return 0;
 }
 

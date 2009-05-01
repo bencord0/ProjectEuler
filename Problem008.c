@@ -25,6 +25,7 @@ char thousand_digit_number[] =
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "Problem008.h"
 
 #define DATA008 "008.data"
 
@@ -33,20 +34,20 @@ int Problem008(void) {
 	int i,j;
 	int max_product = 0;
 	char ish[2];
-	
+
 	ish[1] = '\0';
-	
+
 	for(i=0;i<1000-5;i++) {
 		for(j=i;j<i+5;j++) {
 			ish[0] = thousand_digit_number[j];
 			digits[j-i] = atoi(ish);
 		}
-		
+
 		if(five_product(digits) > max_product) {
 			max_product = five_product(digits);
 		}
 	}
-	
+
 	printf("%d", max_product);
 
 	return 0;
