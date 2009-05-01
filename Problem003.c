@@ -11,7 +11,7 @@ int Problem003(void) {
 	int check=1;
 	mpz_t input;
 	mpz_t suspected_prime_factor, largest_prime_factor;
-	
+
 	mpz_init_set_str(input, "600851475143", 0);
 	mpz_init(suspected_prime_factor);
 	mpz_init_set_ui(largest_prime_factor, 1);
@@ -22,7 +22,7 @@ int Problem003(void) {
 	 */
 	while(check) {
 		mpz_nextprime(suspected_prime_factor, suspected_prime_factor);
-		
+
 		if(mpz_cmp(input,suspected_prime_factor)<0) {
 			check =0;
 			printf("ERR");
@@ -50,11 +50,11 @@ int Problem003(void) {
 				check = 0;
 			}
 		}
-		
+
 	}
 	/*print largest_prime_factor*/
 	gmp_printf("%Zd", largest_prime_factor);
-	
+
 	mpz_clear(input);
 	mpz_clear(suspected_prime_factor);
 	mpz_clear(largest_prime_factor);
@@ -63,20 +63,19 @@ int Problem003(void) {
 
 int Problem003_alt(void) {
 	mpz_t input, test;
-	int check=0;
-	
+
 	mpz_init_set_str(input, "600851475143", 0);
 	mpz_init_set(test, input);
 	mpz_sub_ui(test,test,1);
 /*	mpz_sqrt(test,input);*/
-	
+
 	while(!mpz_divisible_p(input, test)) {
 		mpz_sub_ui(test, test, 1);
 	}
 	gmp_printf("%Zd", test);
-	
+
 	mpz_clear(test);
 	mpz_clear(input);
-	
+
 	return 0;
 }

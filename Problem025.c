@@ -29,7 +29,6 @@ What is the first term in the Fibonacci sequence to contain 1000 digits?
 int Problem025(void) {
 	const unsigned long int start=0;
 	mpz_t n, F,Fsub1,temp; /* n'th term has value F */
-	char *buf;
 
 	mpz_init(n);mpz_init(F);mpz_init(Fsub1);mpz_init(temp);
 
@@ -47,10 +46,10 @@ int Problem025(void) {
 	mpz_add_ui(n,n,1);
 	mpz_add(F,F,Fsub1);
 	mpz_set(Fsub1,temp);
-	
-	
+
+
 	gmp_printf("%Zd",n);
-	
+
 	mpz_clear(n);mpz_clear(F);mpz_clear(Fsub1);mpz_clear(temp);
 	return 0;
 }

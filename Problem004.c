@@ -14,7 +14,7 @@ int Problem004(void) {
 	unsigned long int inner, outer, product;
 	unsigned long int biggest=0;
 	for (outer = 999; outer > 800; outer--)	{
-		
+
 		for (inner = 999; inner > outer; inner--)	{
 			product = inner * outer;
 			if(palindromeTest(product))	{
@@ -23,8 +23,8 @@ int Problem004(void) {
 		}
 	}
 
-	printf("%d", biggest);
-	
+	printf("%lu", biggest);
+
 	return 0;
 }
 
