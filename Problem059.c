@@ -29,22 +29,84 @@ lower case characters. Using cipher1.txt (right click and
 and the knowledge that the plain text must contain common English words,
 decrypt the message and find the sum of the ASCII values in the original text.
 */
-int Problem059(void) { 
+
+/* This problem will be tacled in two phases. One routine to attempt a decryption,
+then another routine to search for common English words (or word). A controller
+function, will assign each key in turn for the decrypter, then pass on the job of
+testing which passes suspects to the user.
+*/
+
+#include <stdio.h>
+#include <string.h>
+
+void decrypter(char *key, FILE *ciphertext);
+void reader(char *key); /* Each decryption is uniqe to the key */
+int next_key(char *key);
+
+int Problem059(void) {
+	char *key = "aaa";
+	FILE *ciphertext;
+
+	ciphertext = fopen("files/cipher1.txt", "r");
+	if(ciphertext == (FILE*) NULL) {
+		perror("059: Cannot open files/cipher1.txt for reading\n");
+		return 2;
+	}
+
+	do {
+		rewind(ciphertext);
+		decrypter(key, ciphertext);
+
+		next_key(key);
+	} while (key != "aaa");
+
+	fclose(ciphertext);
+
 	return 1;
 }
 
-int num2asc(int num) {
-	int ascii;
-	ascii = num;
-	return ascii;
+void decrypter(char *key, FILE *ciphertext) {
+	FILE *plaintext;
+	char *plaintext_name = "files/059---.txt";
+	int a,b,c; /* temp variables */
+	int i,j; /* counters */
+	int check = 0;
+
+	strncat(plaintext_name+9, key, 3);
+
+	plaintext = fopen(plaintext_name, "w");
+	if(plaintext == (FILE*) NULL) {
+		perror("059 decrypter: Unable to write to output");
+		return;
+	}
+
+	/* input and output files are ready, now to xor them */
+	do{
+		check = fscanf(ciphertext, "%d,%d,%d", &a, &b, &c);
+	} while (check == 3);
+
+	fclose(plaintext);
+	return;
 }
 
-int asc2num(int ascii) {
-	int num;
-	num = ascii;
-	return num;
-}
+int next_key(char *key) {
+	if(key[2] != 'z') {
+		key[2] = key[2] + 1;
+	}
 
-int xor(int val, int key) {
-	return val ^ key;
+	if(key[2] == 'z' && key[1] != 'z') {
+		key[2] = 'a';
+		key[1] = key[1] + 1;
+	}
+
+	if(key[2] == 'z' && key[1] == 'z' && key[0] != 'z') {
+		key[2] = key[1] = 'a';
+		key[0] = key[0] + 1;
+	}
+
+	if(key[2] == 'z' && key[1] == 'z' && key[0] == 'z') {
+		key[2] = key[1] = key[0] = 'a';
+	}
+
+	return 0;
 }
