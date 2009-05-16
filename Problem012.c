@@ -22,7 +22,7 @@ What is the value of the first triangle number to have over five hundred divisor
 #include <gmp.h>
 #include "functions.h"
 
-int count_divisors_of_triangular_num(mpz_t t, const mpz_t nth);
+int count_divisors_of_triangular_num(const mpz_t nth);
 int mpz_count_divisors(const mpz_t num);
 int Problem012(void) {
 	mpz_t test_triangle_no, n;
@@ -35,7 +35,7 @@ int Problem012(void) {
 		/*Generate*/
 		mpz_triangular(test_triangle_no,n);
 		/*Count*/
-		divisor_count = count_divisors_of_triangular_num(test_triangle_no,n);
+		divisor_count = count_divisors_of_triangular_num(n);
 
 		/*Test*/
 //		if(divisor_count>200)
@@ -98,7 +98,7 @@ int mpz_count_divisors(const mpz_t num) {
  * D(t) = D(n)*D( (n+1)/2 ) if n odd.
  * where t is the n'th triangular number.
  */
-int count_divisors_of_triangular_num(mpz_t t, const mpz_t nth) {
+int count_divisors_of_triangular_num(const mpz_t nth) {
 	int count;
 	mpz_t n1, n2;
 	mpz_init(n1);

@@ -45,6 +45,8 @@ int main(int argc, char **argv) {
 	prog[57] = Problem057;
 	prog[59] = Problem059;
 
+	printf("Prime generator mode: %d\n", generate_primes(100000000));
+
 	if(argc>1) {
 		/**
 		 * for each number specified on command line, run that problem

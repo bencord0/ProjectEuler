@@ -78,15 +78,12 @@ int palindromeTest(unsigned long int a) {
 	forward = malloc(sizeof(char) * size);
 	backward = malloc(sizeof(char) * size);
 
-	if(size <= gmp_snprintf(forward, size, "%Zd", A)) {
-		/*bad stuff happened*/
-	}
 	mpz_clear(A); /* Don't need it anymore */
 
 	/* Now reverse the string, then compare */
 
 	strcpy(backward, forward);
-	backward = strrev(backward);
+	backward = _strrev(backward);
 
 	if(strcmp(forward, backward)) {
 		return 0;

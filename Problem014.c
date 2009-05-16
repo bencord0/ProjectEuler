@@ -29,7 +29,7 @@ int Problem014(void) {
  */
 
 	unsigned long long int index, length;
-	unsigned long long int longest_chain_index, longest_chain_length;
+	unsigned long long int longest_chain_index=0, longest_chain_length=0;
 
 	/**
 	 * Setup the hash
