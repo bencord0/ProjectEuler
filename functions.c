@@ -83,7 +83,7 @@ int palindromeTest(unsigned long int a) {
 	/* Now reverse the string, then compare */
 
 	strcpy(backward, forward);
-	backward = _strrev(backward);
+	backward = stringReverse(backward);
 
 	if(strcmp(forward, backward)) {
 		return 0;
@@ -92,11 +92,7 @@ int palindromeTest(unsigned long int a) {
 	return 1;
 }
 
-/**
- * Some compilers don't have this function
- * so I provide a version here.
- */
-char *strrev(char *str) {
+char *stringReverse(char *str) {
 	char *p1, *p2, t;
 	if (! str || ! *str)
 		return str;
@@ -106,7 +102,7 @@ char *strrev(char *str) {
 		*p2 = t;
 	}
 	return str;
-}/**/
+}
 
 int is_prime(unsigned long int num) {
 	unsigned long int i;
