@@ -44,9 +44,14 @@ void reader(char *key); /* Each decryption is uniqe to the key */
 int next_key(char *key);
 
 int Problem059(void) {
-	char *key = "aaa";
+	return 1; /* XXX */
+}
+
+int _Problem059(void) {
+	char *key;
 	FILE *ciphertext;
 
+	key = "aaa";
 	ciphertext = fopen("files/cipher1.txt", "r");
 	if(ciphertext == (FILE*) NULL) {
 		perror("059: Cannot open files/cipher1.txt for reading\n");
