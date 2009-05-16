@@ -1,7 +1,7 @@
 #ifndef EULER_H
 #define EULER_H
 
-#define MAX_PROGRAM_COUNT 53
+#define MAX_PROGRAM_COUNT 59
 #include "Problem001.h"
 #include "Problem002.h"
 #include "Problem003.h"
