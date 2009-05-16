@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
 		i = 1;
 		while(argc>i) {
 			if(sscanf(argv[i++], "%d", &p_count)) {
-				if((*prog[p_count])()) {
+				if(p_count > MAX_PROGRAM_COUNT || (*prog[p_count])()) {
 					printf("NOT IMPLEMENTED !!!");
 				}
 			}
@@ -72,8 +72,8 @@ int main(int argc, char **argv) {
 			switch (check) {
 				case 0:
 				/* Success */
-				printf("\n");
 				working++;
+				printf("\n");
 				break;
 
 				case 1:
@@ -84,11 +84,11 @@ int main(int argc, char **argv) {
 
 				case 2:
 				/* Memory/File error */
-				printf("Allocation error\n");
+				printf("Memory or File allocation error\n");
 				break;
 			}
 		}
-	printf("\n%d Problems solved", working);
+		printf("%d Problems solved", working);
 	}
 
 	printf("\nTotal program time is %.3fs\n", (double) clock()/CLOCKS_PER_SEC );

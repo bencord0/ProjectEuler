@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = Euler
 DEPENDPATH += .
-INCLUDEPATH += G:/Code/ProjectEuler/. .
+INCLUDEPATH += .
 LIBS += -lgmp
 CONFIG += console
 CONFIG -= core
