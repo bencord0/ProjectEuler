@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
 	prog[17] = Problem017;
 	prog[20] = Problem020;
 	prog[21] = Problem021;
-	prog[23] = no_problem;
+	prog[23] = Problem023;
 	prog[25] = Problem025;
 	prog[34] = no_problem;
 	prog[45] = Problem045;
