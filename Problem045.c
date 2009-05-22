@@ -20,25 +20,25 @@ int pen(int n){
 	return (n*((3*n)-1))/2;}
 int hex(int n){
 	return n*((2*n)-1);}
-int cmp_tp(a,b){
+int cmp_tp(int a, int b){
 	int t=tri(a),p=pen(b);
 	return (t>p)? 1: (t<p)?-1:0;;}
-int cmp_ph(a,b){
+int cmp_ph(int a, int b){
 	int p=pen(a),h=hex(b);
 	return (p>h)? 1: (p<h)?-1:0;;}
-int cmp_th(a,b){
+int cmp_th(int a, int b){
 	int t=tri(a),h=hex(b);
 	return (t>h)? 1: (t<h)?-1:0;;}
 
-	
+
 int Problem045() {return 1;}
 int Problem045_() {
 	/**
 	 * t*t + t = 3*p*p - p = 4*h*h - 2h
 	 */
-	
+
 	int t=285-6,p=165,h=143;
-	
+
 	while(cmp_tp(t,p) || cmp_th(t,h)) {
 		switch(cmp_tp(t,p)) {
 			case -1:

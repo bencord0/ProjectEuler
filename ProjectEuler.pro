@@ -4,7 +4,6 @@ DEPENDPATH += .
 INCLUDEPATH += .
 LIBS += -lgmp
 CONFIG += console
-CONFIG -= core
 
 # Input
 HEADERS += euler.h \

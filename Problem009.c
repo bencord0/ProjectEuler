@@ -16,7 +16,7 @@
 #include "Problem009.h"
 
 int Problem009(void) {
-	int a,b,c;
+	int a,b,c=0;
 
 	/* Part1 ****************/
 	int escapism = 0;	/* controls flow */

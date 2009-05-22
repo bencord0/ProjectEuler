@@ -48,10 +48,10 @@ int Problem059(void) {
 }
 
 int _Problem059(void) {
-	char *key;
+	char key[4];
 	FILE *ciphertext;
 
-	key = "aaa";
+	strcpy(key, "aaa");
 	ciphertext = fopen("files/cipher1.txt", "r");
 	if(ciphertext == (FILE*) NULL) {
 		perror("059: Cannot open files/cipher1.txt for reading\n");
@@ -63,7 +63,7 @@ int _Problem059(void) {
 		decrypter(key, ciphertext);
 
 		next_key(key);
-	} while (key != "aaa");
+	} while (strcmp(key, "aaa"));
 
 	fclose(ciphertext);
 
@@ -74,7 +74,6 @@ void decrypter(char *key, FILE *ciphertext) {
 	FILE *plaintext;
 	char *plaintext_name = "files/059---.txt";
 	int a,b,c; /* temp variables */
-	int i,j; /* counters */
 	int check = 0;
 
 	strncat(plaintext_name+9, key, 3);
