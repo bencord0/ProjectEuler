@@ -18,7 +18,6 @@ Find the sum of all the positive integers which cannot be written as the sum of 
 
 /*
 Extra Observations:
-	
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,23 +25,58 @@ Extra Observations:
 #include "functions.h"
 
 int isFrom2abundantNumbers(int n);
+int find_nearest_abundant_number(const int n, int level);
 int Problem023(void)	{
 	int i, sum=0;
+	int a,b;
+	int level;
 
 	for(i=15;i<28123;++i) {
-		if(!isFrom2abundantNumbers(i)) {
-			sum += i;
+		level = 1;
+next_a:
+		a = find_nearest_abundant_number(i/2, level);
+		if(!a) break; /* check error code */
+		b = i-a;
+
+		if(chkPerfection(b)>0) {
+			sum -= i;
+		} else {
+			++level;
+			goto next_a;
 		}
 	}
+
+	for(i=0; i<28123; i++) {
+		sum += i;
+	}
+
 	printf("%d", sum);
 	return 0;
 }
 
+int find_nearest_abundant_number(const int n, int level) {
+	/* It might be possible to run this code in parallel */
+	int i = n, j = n;
+
+	while (i < 2*n || j > 0) {
+		if(chkPerfection(++i)>0 && --level == 0) {
+			return i;
+		}
+		if(chkPerfection(--j)>0 && level == 0) {
+			return j;
+		}
+	}
+	return 0;
+}
+
+/**
+ * Iterating through all possible n works, but is quite slow
+ */
 int isFrom2abundantNumbers(int n) {
 	int a,b;
 
 	for(a=1,b=n-a; a<=n/2; ++a, --b) {
-		if(chkPerfection(a) + chkPerfection(b) == 2) { /* Abundant */
+		if(chkPerfection(a) + chkPerfection(b) == 2) {
 			return 1;
 		}
 	}
