@@ -16,70 +16,54 @@ cannot be expressed as the sum of two abundant numbers is less than this limit.
 Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 */
 
-/*
-Extra Observations:
-*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <gmp.h>
 #include "functions.h"
 
-int isFrom2abundantNumbers(int n);
-int find_nearest_abundant_number(const int n, int level);
+enum {ABUNDANT_NUMBER_CAP = 28123};
+
 int Problem023(void)	{
-	int i, sum=0;
-	int a,b;
-	int level;
 
-	for(i=15;i<28123;++i) {
-		level = 1;
-next_a:
-		a = find_nearest_abundant_number(i/2, level);
-		if(!a) break; /* check error code */
-		b = i-a;
+	int *abundant_array;
+	int *from_two_abundants_array;
+	int i,j;
 
-		if(chkPerfection(b)>0) {
-			sum -= i;
-		} else {
-			++level;
-			goto next_a;
+	/**
+	 * Setup array of abundant numbers.
+	 * Abundant numbers are marked.
+	 */
+	abundant_array = malloc(sizeof(int) * ABUNDANT_NUMBER_CAP+1);
+	for(i=0; i<ABUNDANT_NUMBER_CAP;++i) {
+		abundant_array[i] = 0;
+		if(chkPerfection(i)>0) {
+			abundant_array[i] = 1;
 		}
 	}
 
-	for(i=0; i<28123; i++) {
-		sum += i;
-	}
-
-	printf("%d", sum);
-	return 0;
-}
-
-int find_nearest_abundant_number(const int n, int level) {
-	/* It might be possible to run this code in parallel */
-	int i = n, j = n;
-
-	while (i < 2*n || j > 0) {
-		if(chkPerfection(++i)>0 && --level == 0) {
-			return i;
-		}
-		if(chkPerfection(--j)>0 && level == 0) {
-			return j;
-		}
-	}
-	return 0;
-}
-
-/**
- * Iterating through all possible n works, but is quite slow
- */
-int isFrom2abundantNumbers(int n) {
-	int a,b;
-
-	for(a=1,b=n-a; a<=n/2; ++a, --b) {
-		if(chkPerfection(a) + chkPerfection(b) == 2) {
-			return 1;
+	/**
+	 * Numbers that can be made from two abundant numbers
+	 * are marked.
+	 */
+	from_two_abundants_array = malloc(sizeof(int) * ABUNDANT_NUMBER_CAP+1);
+	for(i=0;i<ABUNDANT_NUMBER_CAP;++i) from_two_abundants_array[i] = 0;
+	for(i=1;i<ABUNDANT_NUMBER_CAP;++i) {
+		for(j=i;j<ABUNDANT_NUMBER_CAP;++j) {
+			if(abundant_array[i] && abundant_array[j]) {
+				from_two_abundants_array[i+j] = 1;
+			}
 		}
 	}
 
+	j=0;
+	for(i=0;i<ABUNDANT_NUMBER_CAP;++i)
+		if(!from_two_abundants_array[i]) {
+			j+=i;
+		}
+
+	printf("%d", j);
+
+	free(abundant_array);
+	free(from_two_abundants_array);
 	return 0;
 }
