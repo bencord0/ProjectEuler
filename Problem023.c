@@ -45,8 +45,8 @@ int Problem023(void)	{
 	 * Numbers that can be made from two abundant numbers
 	 * are marked.
 	 */
-	from_two_abundants_array = malloc(sizeof(int) * ABUNDANT_NUMBER_CAP+1);
-	for(i=0;i<ABUNDANT_NUMBER_CAP;++i) from_two_abundants_array[i] = 0;
+	from_two_abundants_array = malloc(sizeof(int) * (2 * ABUNDANT_NUMBER_CAP)+1);
+	for(i=0;i<(2*ABUNDANT_NUMBER_CAP);++i) from_two_abundants_array[i] = 0;
 	for(i=1;i<ABUNDANT_NUMBER_CAP;++i) {
 		for(j=i;j<ABUNDANT_NUMBER_CAP;++j) {
 			if(abundant_array[i] && abundant_array[j]) {
@@ -62,7 +62,6 @@ int Problem023(void)	{
 		}
 
 	printf("%d", j);
-
 	free(abundant_array);
 	free(from_two_abundants_array);
 	return 0;
