@@ -3,7 +3,7 @@ If the numbers 1 to 5 are written out in words: one, two, three, four, five,
 then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
 
 If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words,
-how many letters would be used? 
+how many letters would be used?
 
 NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two)
 contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of
@@ -11,26 +11,78 @@ contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The u
 */
 
 #include <stdio.h>
-const int zero = 4, one = 3, two = 3, three = 5, four = 4, five = 4, six  = 3;
-const int seven = 5, eight = 5, nine = 4, ten = 3, eleven = 6, twelve = 6;
-const int twen = 4, thir = 4, teen=4, ty = 2, y = 1, fif = 3,  and = 3;
-const int hundred = 7, thousand = 8;
+enum { one = 3, two = 3, three = 5, four = 4, five = 4, six  = 3,
+ seven = 5, eight = 5, eigh = 4, nine = 4, ten = 3, eleven = 6, twelve = 6,
+ twen = 4, thir = 4, teen=4, ty = 2, fif = 3,
+ hundred = 7, thousand = 8
+};
 
+int one_ninetynine();
+int somethinghundred_somethinghundredandninetynine(int something);
 int Problem017() {
-	return 1; /* XXX 
-	
-	
-	int i, sum;
-	
-	for(i=1,sum=0; i < 1000;i++) {
-		
-		
-		
-		
-		
-		
-	}
-	*/
-	
+	int sum=0;
+
+	sum += one_ninetynine();
+
+	sum += somethinghundred_somethinghundredandninetynine(one);
+	sum += somethinghundred_somethinghundredandninetynine(two);
+	sum += somethinghundred_somethinghundredandninetynine(three);
+	sum += somethinghundred_somethinghundredandninetynine(four);
+	sum += somethinghundred_somethinghundredandninetynine(five);
+	sum += somethinghundred_somethinghundredandninetynine(six);
+	sum += somethinghundred_somethinghundredandninetynine(seven);
+	sum += somethinghundred_somethinghundredandninetynine(eight);
+	sum += somethinghundred_somethinghundredandninetynine(nine);
+
+	sum += one + thousand;
+	printf("%d", sum);
+
 	return 0;
+}
+
+int one_nine() {
+	return 36;
+}
+
+int ten_nineteen() {
+	int sum=0, i;
+	sum += ten + eleven + twelve + thir + four + fif + six + seven + eigh + nine;
+	for(i=13;i<=19;++i) {
+		sum += teen;
+	}
+	return sum;
+}
+
+int something_somethingnine(int something) {
+	int sum=0;
+	sum += something * 10;
+	sum += 56;
+	return sum;
+}
+
+int one_ninetynine() {
+	int sum=0;
+
+	sum += one_nine();
+	sum += ten_nineteen();
+
+	sum += something_somethingnine(twen);
+	sum += something_somethingnine(thir);
+	sum += something_somethingnine(3);
+	sum += something_somethingnine(fif);
+	sum += something_somethingnine(six);
+	sum += something_somethingnine(seven);
+	sum += something_somethingnine(eigh);
+	sum += something_somethingnine(nine);
+	return sum;
+}
+
+int somethinghundred_somethinghundredandninetynine(int something) {
+	int sum=0;
+
+	sum += 100 * (something + hundred + 3);
+	sum -= 3; /* and */
+	sum += one_ninetynine();
+
+	return sum;
 }
