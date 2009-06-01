@@ -12,97 +12,66 @@ Find the next triangle number that is also pentagonal and hexagonal.
 
 #include <stdio.h>
 #include <limits.h>
+#include <math.h>
 #include "Problem045.h"
 
-int tri(int n){
+int tri(int n) {
 	return (n*(n+1))/2;}
-int pen(int n){
+int invtri(int T) {
+	int n = -1 + (int)sqrt(1 + (8*T));
+	n /= 2;
+
+	if(tri(n) == T ) {
+		return n;
+	}
+	return 0;
+}
+int pen(int n) {
 	return (n*((3*n)-1))/2;}
-int hex(int n){
+int invpen(int P) {
+	int n = 1 + sqrt(1 + (24 * P));
+	n = n/6;
+
+	if(pen(n) == P) {
+		return n;
+	}
+	return 0;
+}
+int hex(int n) {
 	return n*((2*n)-1);}
-int cmp_tp(int a, int b){
-	int t=tri(a),p=pen(b);
-	return (t>p)? 1: (t<p)?-1:0;;}
-int cmp_ph(int a, int b){
-	int p=pen(a),h=hex(b);
-	return (p>h)? 1: (p<h)?-1:0;;}
-int cmp_th(int a, int b){
-	int t=tri(a),h=hex(b);
-	return (t>h)? 1: (t<h)?-1:0;;}
+int invhex(int H) {
+	int n = 1 + sqrt(1 + (8*H));
+	n /= 4;
 
+	if(hex(n) == H) {
+		return n;
+	}
+	return 0;
+}
 
-int Problem045() {return 1;}
-int Problem045_() {
-	/**
-	 * t*t + t = 3*p*p - p = 4*h*h - 2h
-	 */
+int is_n_answer(int n);
 
-	int t=285-6,p=165,h=143;
+int Problem045() {
+	return 1;
+}
+int _Problem045() {
+	int n = 40755 + 1; /* know n = integer */
 
-	while(cmp_tp(t,p) || cmp_th(t,h)) {
-		switch(cmp_tp(t,p)) {
-			case -1:
-				t++;
-				break;
-			case 0:
-			default:
-			case 1:
-				break;
-		}
-		switch(cmp_th(t,h)) {
-			case -1:
-				t++;
-				break;
-			case 0:
-			default:
-			case 1:
-				break;
-		}
-
-
-		while(cmp_ph(p,h) || cmp_tp(t,p)) {
-			switch(cmp_ph(p,h)) {
-				case -1:
-					p++;
-				case 0:
-				default:
-				case 1:
-					break;
-			}
-			switch(cmp_tp(t,p)) {
-				case -1:
-				case 0:
-				default:
-					break;
-				case 1:
-					p++;
-					break;
-			}
-
-			while(cmp_ph(p,h) || cmp_th(t,h)) {
-				switch(cmp_ph(p,h)) {
-					case -1:
-					case 0:
-					default:
-						break;
-					case 1:
-						h++;
-						break;
-				}
-				switch(cmp_th(t,h)) {
-					case -1:
-					case 0:
-					default:
-						break;
-					case 1:
-						h++;
-						break;
-				}
-			}
-		}
+	while(!is_n_answer(n)) {
+		++n;
 	}
 
-	printf("%d",tri(t));
+	printf("%d",n);
+	return 0;
+}
 
+int is_n_answer(int n) {
+	int T = invtri(n);
+	int P = invpen(n);
+	int H = invhex(n);
+	if(H&&P) printf("is_n_answer: n:%d T:%d P:%d H:%d\n", n, T,P,H);
+	if(T && P && H) {
+		return 1;
+	}
 	return 0;
 }
