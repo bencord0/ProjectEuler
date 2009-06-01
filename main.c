@@ -3,6 +3,7 @@
 #include "euler.h"
 
 int no_problem(void) {return 1;}
+int wrap(int (*prog)(void));
 
 int main(int argc, char **argv) {
 	int p_count = 0;
@@ -45,7 +46,7 @@ int main(int argc, char **argv) {
 	prog[57] = Problem057;
 	prog[59] = Problem059;
 
-	printf("Prime generator mode: %d\n", generate_primes(100000000));
+	printf("Prime generator mode: %d\n", generate_primes(10000000));
 
 	if(argc>1) {
 		/**
@@ -55,7 +56,7 @@ int main(int argc, char **argv) {
 		i = 1;
 		while(argc>i) {
 			if(sscanf(argv[i++], "%d", &p_count)) {
-				if(p_count > MAX_PROGRAM_COUNT || (*prog[p_count])()) {
+				if(p_count > MAX_PROGRAM_COUNT || wrap(prog[p_count])) {
 					printf("NOT IMPLEMENTED !!!");
 				}
 			}
@@ -68,7 +69,7 @@ int main(int argc, char **argv) {
 		for(p_count=1;p_count <= MAX_PROGRAM_COUNT;p_count++) {
 			printf("Problem%3d: ", p_count);
 
-			check = (*prog[p_count])();
+			check = wrap(prog[p_count]);
 			switch (check) {
 				case 0:
 				/* Success */
@@ -94,4 +95,18 @@ int main(int argc, char **argv) {
 	printf("\nTotal program time is %.3fs\n", (double) clock()/CLOCKS_PER_SEC );
 
 	return 0;
+}
+
+int wrap(int (*prog)(void)) {
+	int ret;
+	double CLOCK_START;
+	double CLOCK_END;
+
+	CLOCK_START = clock();
+	ret = (prog());
+	CLOCK_END = clock();
+
+	if(!ret)
+		printf("\t%.3fs", (CLOCK_END - CLOCK_START)/CLOCKS_PER_SEC);
+	return ret;
 }
