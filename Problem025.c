@@ -48,7 +48,7 @@ int Problem025(void) {
 	mpz_set(Fsub1,temp);
 
 
-	gmp_printf("%Zd",n);
+	gmp_printf("%30Zd",n);
 
 	mpz_clear(n);mpz_clear(F);mpz_clear(Fsub1);mpz_clear(temp);
 	return 0;

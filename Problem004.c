@@ -23,7 +23,7 @@ int Problem004(void) {
 		}
 	}
 
-	printf("%lu", biggest);
+	printf("%30lu", biggest);
 
 	return 0;
 }

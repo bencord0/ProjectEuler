@@ -30,6 +30,6 @@ int Problem005(void) {
 		N *= pow(p[i],a[i]);
 	}
 
-	printf("%.0f", N);
+	printf("%30.0f", N);
 	return 0;
 }

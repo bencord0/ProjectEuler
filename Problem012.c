@@ -43,7 +43,7 @@ int Problem012(void) {
 
 		if(divisor_count>=500) {
 			/*Succeed*/
-			gmp_printf("%Zd", test_triangle_no);
+			gmp_printf("%30Zd", test_triangle_no);
 			break;
 		}
 
@@ -67,7 +67,7 @@ int Problem012(void) {
  */
 int mpz_count_divisors(const mpz_t num) {
 	int count=0;
-	mpz_t div; 
+	mpz_t div;
 	mpz_t sqt;
 	mpz_init(sqt);
 	mpz_init(div);
@@ -88,7 +88,7 @@ int mpz_count_divisors(const mpz_t num) {
 
 	mpz_clear(div);
 	mpz_clear(sqt);
-	
+
 	return count;
 }
 
@@ -107,7 +107,7 @@ int count_divisors_of_triangular_num(const mpz_t nth) {
 	if(mpz_even_p(nth)){
 		mpz_divexact_ui(n1,nth,2);
 		mpz_add_ui(n2,nth,1);
-		
+
 	} else {
 		mpz_set(n1,nth);
 		mpz_add_ui(n2,nth,1);

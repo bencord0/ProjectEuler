@@ -25,15 +25,15 @@ int Problem053() {
 	int n, r;
 	int count = 0;
 	int val;
-	
+
 	for(n=1;n<100;n++) {
 		for(r=1;r<n;r++) {
 			val = nCr(n,r);
 			if(val>1000000) {
 				count++;
 	}	}	}
-	
-	printf("%d", count);
+
+	printf("%30d", count);
 	return 0;
 }
 
@@ -44,7 +44,7 @@ unsigned long int nCr(unsigned long int n, unsigned long int r) {
 	mpz_init(a);
 	mpz_init(b);
 	mpz_init(c);
-	
+
 	if(n>r) {
 			mpz_fac_ui(a,n);
 			mpz_fac_ui(b,r);

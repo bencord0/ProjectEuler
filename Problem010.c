@@ -50,7 +50,7 @@ int Problem010(void) {
 		}
 	}
 
-	gmp_printf("%Zd", sum);
+	gmp_printf("%30Zd", sum);
 	mpz_clear(sum);
 	free(sieve);
 	return 0;

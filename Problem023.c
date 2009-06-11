@@ -61,7 +61,7 @@ int Problem023(void)	{
 			j+=i;
 		}
 
-	printf("%d", j);
+	printf("%30d", j);
 	free(abundant_array);
 	free(from_two_abundants_array);
 	return 0;

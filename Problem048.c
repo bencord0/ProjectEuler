@@ -28,8 +28,8 @@ int Problem048(void) {
 	buf = malloc(size);
 	mpz_get_str(buf, 10, sum);
 
+	printf("                    ");
 	printf("%s", buf+strlen(buf)-10);
-
 	mpz_clear(sum);
 	mpz_init(term);
 	free(buf);

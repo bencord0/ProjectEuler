@@ -54,7 +54,7 @@ int Problem014(void) {
 		}
 	}
 
-	printf("%llu",longest_chain_index);
+	printf("%30llu",longest_chain_index);
 
 	/**
 	 * Bomb the hashes
