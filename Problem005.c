@@ -19,9 +19,8 @@ int Problem005(void) {
 	/* initial powers of corresponding primes */
 	int a[] = {1,1,1,1, 1, 1, 1, 1, 0};
 
-	for(i=0;p[i]<=k;i++) {
+	for(i=0;p[i]<k;i++) {
 		if(check) {
-
 			if(p[i] <= limit) {
 				a[i] = (int) floor( log10(k) / log10(p[i]) );
 			} else {
@@ -31,7 +30,6 @@ int Problem005(void) {
 		N *= pow(p[i],a[i]);
 	}
 
-	i = (int) N;
-	printf("%d",i);
+	printf("%.0f", N);
 	return 0;
 }
