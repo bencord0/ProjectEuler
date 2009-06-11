@@ -141,3 +141,12 @@ void mpz_triangular_ui(mpz_t rot, unsigned long int op) {
 	mpz_clear(zop);
 	return;
 }
+
+long int factorial(int n)
+ {
+  if (n<=1)
+	return(1);
+  else
+	n=n*factorial(n-1);
+	return(n);
+ }
