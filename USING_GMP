@@ -97,18 +97,18 @@ void mpz_abs(mpz_t rop, mpz_t op) /* absolute value */
 void mpz_mod(mpz_t r, mpz_t n, mpz_t d)
 unsigned long int mpz_mod_ui(mpz_t r, mpz_t n, unsigned long int d)
  /* r = n (mod d) */
- 
+
  void mpz_divexact(mpz_t q, mpz_t n, mpz_t d)
  void mpz_divexact_ui(mpz_t q, mpz_t n, unsigned long d)
  /* q = n/d */
- 
+
 int mpz_divisible_p(mpz_t n, mpz_t d)
 int mpz_divisible_ui_p(mpz_t n, unsigned long int d)
  /* if there is an integer q such that n = qd, then returns non-zero, d=0 allowed */
 int mpz_congruent_p(mpz_t n, mpz_t c, mpz_t d)
 int mpz_congruent_ui_p(mpz_t n, unsigned long int c, unsigned long int d)
  /* non-zero if an integer q such that n = c + qd, d=0 allowed.
- 
+
 void mpz_powm(mpz_t rop, mpz_t base, mpz_t ezp, mpz_t mod)
 void mpz_powm_ui(mpz_t rop, mpz_t base, unsigned long int exp, mpz_t mod)
 /* rop = base^exp (mod mod) */

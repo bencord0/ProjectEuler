@@ -8,7 +8,6 @@ In combinatorics, we use the notation, 5C3 = 10.
 
 In general,nCr = 	n!/r!(n-r)!	,where r<=n, n! = n*(n-1)...3*2*1, and 0! = 1.
 
-
 It is not until n = 23, that a value exceeds one-million:
 23C10 = 1144066.
 
@@ -25,14 +24,14 @@ int Problem053() {
 	int n, r;
 	int count = 0;
 	int val;
-	
+
 	for(n=1;n<100;n++) {
 		for(r=1;r<n;r++) {
 			val = nCr(n,r);
 			if(val>1000000) {
 				count++;
 	}	}	}
-	
+
 	printf("%d", count);
 	return 0;
 }
@@ -44,7 +43,7 @@ unsigned long int nCr(unsigned long int n, unsigned long int r) {
 	mpz_init(a);
 	mpz_init(b);
 	mpz_init(c);
-	
+
 	if(n>r) {
 			mpz_fac_ui(a,n);
 			mpz_fac_ui(b,r);
