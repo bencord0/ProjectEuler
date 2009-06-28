@@ -29,7 +29,7 @@ int Problem016() {
 		sum += atoi(ish);
 	}
 
-	printf("%d", sum);
+	printf("%30d", sum);
 
 	mpz_clear(a);
 

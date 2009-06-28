@@ -26,7 +26,7 @@ int Problem020(void) {
 		ish[0] = *(buf+i);
 		sum+=atoi(ish);
 	}
-	printf("%d",sum);
+	printf("%30d",sum);
 
 	free(buf);
 	mpz_clear(fac);

@@ -33,7 +33,7 @@ int Problem009(void) {
 
 end009:
 	/* Part3 ****************/
-	printf("%d", a*b*c);
+	printf("%30d", a*b*c);
 	return 0;
 }
 

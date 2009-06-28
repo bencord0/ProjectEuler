@@ -19,7 +19,7 @@ int Problem021(void)	{
 				sum+=a+b;
 			}
 	}
-	printf("%d",sum);
+	printf("%30d",sum);
 	return 0;
 }
 
@@ -30,7 +30,7 @@ int Problem021_suppliment(void)	{
 	int i=1;
 	while(1)	{
 		if(!chkPerfection(i) )	{
-		printf("%d\n",i);
+		printf("%30d\n",i);
 		}
 	i++;
 	}

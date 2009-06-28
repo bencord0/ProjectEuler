@@ -48,7 +48,7 @@ int Problem008(void) {
 		}
 	}
 
-	printf("%d", max_product);
+	printf("%30d", max_product);
 
 	return 0;
 }

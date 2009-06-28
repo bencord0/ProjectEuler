@@ -53,7 +53,7 @@ int Problem003(void) {
 
 	}
 	/*print largest_prime_factor*/
-	gmp_printf("%Zd", largest_prime_factor);
+	gmp_printf("%30Zd", largest_prime_factor);
 
 	mpz_clear(input);
 	mpz_clear(suspected_prime_factor);
@@ -72,7 +72,7 @@ int Problem003_alt(void) {
 	while(!mpz_divisible_p(input, test)) {
 		mpz_sub_ui(test, test, 1);
 	}
-	gmp_printf("%Zd", test);
+	gmp_printf("%30Zd", test);
 
 	mpz_clear(test);
 	mpz_clear(input);

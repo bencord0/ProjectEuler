@@ -121,9 +121,11 @@ mpz_init_set_str(grid[99],"53503534226472524250874054075591789781264330331690",1
 	str = malloc(sizeof(char) * (2+mpz_sizeinbase(sum,10)) );
 	gmp_sprintf(str,"%Zd", sum);
 
+	printf("                    ");
 	for (i=0;i<10;i++) {
 		printf("%c", *(str+i));
 	}
+
 	free(str);
 	return 0;
 }

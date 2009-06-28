@@ -13,4 +13,6 @@ int is_prime(unsigned long int num);
 void mpz_triangular(mpz_t rot, mpz_t op);
 void mpz_triangular_ui(mpz_t rot, unsigned long int op);
 
+long int factorial(int n);
+
 #endif

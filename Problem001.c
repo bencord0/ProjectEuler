@@ -10,7 +10,7 @@ int Problem001(void)
 {
 	int sum = 0;
 	int i;
-	
+
 	for (i = 1; i < 1000; i++)
 	{
 		if (!(i%3) ||!(i%5))
@@ -18,6 +18,6 @@ int Problem001(void)
 			sum += i;
 		}
 	}
-	printf("%d",sum);
+	printf("%30d",sum);
 	return 0;
 }

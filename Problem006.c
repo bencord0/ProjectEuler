@@ -26,6 +26,6 @@ int Problem006(void) {
 
 	squareSum = squareSum*squareSum;
 
-	printf("%d", (squareSum - sumSquares) );
+	printf("%30d", (squareSum - sumSquares) );
 	return 0;
 }

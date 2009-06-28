@@ -68,28 +68,17 @@ int sumToN(int n)	{
  * Returns non-zero if a is a palindrome
  */
 int palindromeTest(unsigned long int a) {
-	char *forward;
-	char *backward;
+	char forward[20];
+	char backward[20];
 	size_t size;
-	mpz_t A;
 
-	mpz_init_set_ui(A, a);
-	size = mpz_sizeinbase(A, 10) + 1; /* for the sign and '\0' */
-	forward = malloc(sizeof(char) * size);
-	backward = malloc(sizeof(char) * size);
-
-	mpz_clear(A); /* Don't need it anymore */
+	size = sprintf(forward, "%lu", a);
 
 	/* Now reverse the string, then compare */
-
 	strcpy(backward, forward);
-	backward = stringReverse(backward);
+	stringReverse(backward);
 
-	if(strcmp(forward, backward)) {
-		return 0;
-	}
-
-	return 1;
+	return !strcmp(forward, backward);
 }
 
 char *stringReverse(char *str) {
@@ -141,3 +130,12 @@ void mpz_triangular_ui(mpz_t rot, unsigned long int op) {
 	mpz_clear(zop);
 	return;
 }
+
+long int factorial(int n)
+ {
+  if (n<=1)
+	return(1);
+  else
+	n=n*factorial(n-1);
+	return(n);
+ }

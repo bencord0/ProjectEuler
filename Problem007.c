@@ -12,14 +12,14 @@ int Problem007(void) {
 	unsigned long int counter;
 	mpz_t prime;
 	mpz_init_set_ui(prime, 1);
-	
+
 	for(counter = 0; counter < max; counter++) {
 		do{
 			mpz_nextprime(prime,prime);
 		}while(mpz_probab_prime_p(prime,20)<2);
 	}
-	
-	gmp_printf("%Zd", prime);
+
+	gmp_printf("%30Zd", prime);
 	mpz_clear(prime);
 	return 0;
 }

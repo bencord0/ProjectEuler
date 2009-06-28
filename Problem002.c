@@ -20,6 +20,6 @@ int Problem002(void)
 		a=b;
 		b=c;
     } while ((a+b)<4000000);
-    printf("%d",sum);
+    printf("%30d",sum);
     return 0;
 }

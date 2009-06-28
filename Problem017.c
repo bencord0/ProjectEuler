@@ -35,7 +35,7 @@ int Problem017() {
 	sum += somethinghundred_somethinghundredandninetynine(nine);
 
 	sum += one + thousand;
-	printf("%d", sum);
+	printf("%30d", sum);
 
 	return 0;
 }

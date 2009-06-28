@@ -1,0 +1,6 @@
+primes.txt
+*.o
+Euler
+*.exe
+release
+debug

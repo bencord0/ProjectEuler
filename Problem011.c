@@ -94,7 +94,7 @@ int Problem011_(void) {
 		}
 	}
 
-	printf("%d", biggest);
+	printf("%30d", biggest);
 	return 0;
 }
 
