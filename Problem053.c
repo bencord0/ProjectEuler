@@ -22,6 +22,11 @@ are greater than one-million?
 unsigned long int nCr(unsigned long int n, unsigned long int r);
 
 int Problem053() {
+	/* dummy implementation while I get a working nCr() and factorial() */
+	return 1;
+}
+
+int _Problem053() {
 	int n, r;
 	int count = 0;
 	int val;
