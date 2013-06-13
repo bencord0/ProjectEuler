@@ -1,3 +1,21 @@
+/*
+* Copyright 2013 Ben Cordero
+*
+* This file is part of my ProjectEuler implementations.
+*
+*    This program is free software: you can redistribute it and/or modify
+*    it under the terms of the GNU General Public License as published by
+*    the Free Software Foundation, either version 3 of the License, or
+*    (at your option) any later version.
+*
+*    This program is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*    GNU General Public License for more details.
+*
+*    You should have received a copy of the GNU General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 /*Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
 37107287533902102798797998220837590246510135740250
 46376937677490009712648124896970078050417018260538
