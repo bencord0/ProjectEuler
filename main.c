@@ -76,6 +76,7 @@ int main(int argc, char **argv) {
 		i = 1;
 		while(argc>i) {
 			if(sscanf(argv[i++], "%d", &p_count)) {
+                printf("Problem%3d: ", p_count);
 				if(p_count > MAX_PROGRAM_COUNT || wrap(prog[p_count])) {
 					printf("NOT IMPLEMENTED !!!");
 				}
