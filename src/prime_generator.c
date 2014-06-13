@@ -28,7 +28,7 @@
  * 	use a flag to indicate strictness of prime checking.
  * 	use a flag to indicate which algorithm to use.
  */
-int generate_primes(unsigned long long int upper_bound/*, struct opts options*/) {
+int generate_primes(unsigned long long int upper_bound) {
 	mpz_t p, q;
 	FILE *prime_f;
 
@@ -43,6 +43,9 @@ int generate_primes(unsigned long long int upper_bound/*, struct opts options*/)
 		/* we cant do much now */
 		return 2;
 	}
+
+	fprintf(stderr, "Generating prime numbers with an upper bound of %llu\n", upper_bound);
+
 	mpz_init(p);
 	mpz_init(q);
 	/* some code to determine mode */
