@@ -15,12 +15,13 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-TEMPLATE = app
 TARGET = Euler
-DEPENDPATH += .
-INCLUDEPATH += .
-LIBS += -lgmp
-CONFIG += console
+LIBS=-lm -lgmp
+
+all: Euler
+
+$(TARGET): $(SOURCES) $(HEADERS)
+	$(CC) -o Euler -I ./include $(LIBS) $(SOURCES)
 
 # Input
 HEADERS += euler.h \
@@ -56,36 +57,36 @@ HEADERS += euler.h \
     Problem053.h \
     Problem057.h \
     Problem059.h
-SOURCES += functions.c \
-    main.c \
-    prime_generator.c \
-    Problem001.c \
-    Problem002.c \
-    Problem003.c \
-    Problem004.c \
-    Problem005.c \
-    Problem006.c \
-    Problem007.c \
-    Problem008.c \
-    Problem009.c \
-    Problem010.c \
-    Problem011.c \
-    Problem012.c \
-    Problem013.c \
-    Problem014.c \
-    Problem015.c \
-    Problem016.c \
-    Problem017.c \
-    Problem018.c \
-    Problem020.c \
-    Problem021.c \
-    Problem023.c \
-    Problem025.c \
-    Problem034.c \
-    Problem038.c \
-    Problem043.c \
-    Problem045.c \
-    Problem048.c \
-    Problem053.c \
-    Problem057.c \
-    Problem059.c
+SOURCES += src/functions.c \
+    src/main.c \
+    src/prime_generator.c \
+    src/Problem001.c \
+    src/Problem002.c \
+    src/Problem003.c \
+    src/Problem004.c \
+    src/Problem005.c \
+    src/Problem006.c \
+    src/Problem007.c \
+    src/Problem008.c \
+    src/Problem009.c \
+    src/Problem010.c \
+    src/Problem011.c \
+    src/Problem012.c \
+    src/Problem013.c \
+    src/Problem014.c \
+    src/Problem015.c \
+    src/Problem016.c \
+    src/Problem017.c \
+    src/Problem018.c \
+    src/Problem020.c \
+    src/Problem021.c \
+    src/Problem023.c \
+    src/Problem025.c \
+    src/Problem034.c \
+    src/Problem038.c \
+    src/Problem043.c \
+    src/Problem045.c \
+    src/Problem048.c \
+    src/Problem053.c \
+    src/Problem057.c \
+    src/Problem059.c
