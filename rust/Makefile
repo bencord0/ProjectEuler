@@ -1,7 +1,8 @@
 RUSTC=rustc
 TARGETS= \
     problem1 \
-    problem2
+    problem2 \
+    problem3
 
 all: $(TARGETS)
 
